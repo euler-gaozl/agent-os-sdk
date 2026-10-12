@@ -25,6 +25,12 @@ and `-mod=vendor`; no personal GitHub token or adjacent `replace` path is needed
 The integration release tooling records the exact SDK commit/module checksum.
 Changes require a new version; never overwrite a released module version.
 
+The initial local rc.1 proxy archive used Windows CRLF conversion and is not a
+canonical Go module archive. Do not consume its locally generated module sums.
+rc.2 fixes source line-ending rules; exports use the same `core.autocrlf=input`
+and `core.eol=lf` settings as Go's Git module fetcher. The original tag/history
+is retained; dependency consumers move to rc.2 with regenerated vendor/sums.
+
 The SDK is not a deployment unit and contains no service-specific defaults.
 `RUNTIME_URL` enables optional instance heartbeats; omitting it disables them.
 Secrets and endpoint configuration are supplied by the service deployment.
